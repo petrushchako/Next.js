@@ -97,3 +97,48 @@ You can also push this to GitHub if desired:
 gh repo create nextjs-advertising-site --public --source=. --remote=origin
 git push -u origin main
 ```
+
+<hr><br><br><br><br><br><br><br><br>
+
+## What is `npx`?
+`npx` is a command that comes bundled with **npm (v5.2.0 and above)**. It allows you to **run Node.js CLI packages without installing them globally**.
+
+## How does `npx` work?
+When you run:
+
+```bash
+npx create-next-app@latest
+```
+
+Here’s what happens behind the scenes:
+1. **Temporary download**
+   `npx` looks for `create-next-app`:
+   * If it's not installed globally or locally, it downloads it **temporarily** into a cache directory.
+2. **Run and discard**
+   It executes the CLI (in this case, the Next.js project generator), then discards the package after use (unless cached).
+3. **You don’t need to install anything globally**
+   No `npm install -g create-next-app` is needed. You save system space and avoid clutter.
+
+<br>
+
+## Why this is useful?
+* Keeps environments **clean** and **reproducible**
+* Avoids **version conflicts** between global installs
+* Helps with **automation** (use it in scripts without setup overhead)
+
+<br>
+
+## What if you want to run it multiple times?
+The first run may take a bit longer (due to download). After that, it's cached. But if you want to avoid repeated downloads, you can:
+
+```bash
+npm install -g create-next-app
+```
+
+Then you can use:
+
+```bash
+create-next-app my-project
+```
+
+But this comes with version control challenges (especially on CI/CD machines), so `npx` is often the safer default.
